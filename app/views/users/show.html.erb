@@ -3,4 +3,25 @@
 <p>Friends Count: <%= @user.friends_count if @user.friends_count %></p>
 <p>Age: <%= @user.age if @user.age %></p>
 <p>Gender: <%= @user.gender if @user.gender %></p>
-<%= @graph.birthday.to_date.year  %>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/uk_UA/sdk.js#xfbml=1&appId=1499552633639161&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div class="fb-share-button" data-href="https://www.facebook.com/pages/Bookface/131893070214423" data-width="100"></div>
+
+<hr>
+
+<% if @last_post_id.to_s === @admin_page %>
+
+<%= @last_post_id.to_s + ' TRUE' %>
+<a href="#">next</a>
+<%else%>
+<%= @last_post_id.to_s %>
+FALSE
+<%end %>
