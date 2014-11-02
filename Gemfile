@@ -15,6 +15,7 @@ gem 'mysql2'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'simple_form'
+gem 'fb_graph2'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]
