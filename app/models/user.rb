@@ -11,8 +11,10 @@ class User < ActiveRecord::Base
     end
   end
 
-  def add_data_to_profile(friends_count)
-    self.friends_count =friends_count
+  def add_data_to_profile(friends_count, gender, age)
+    self.friends_count = friends_count
+    self.gender = gender
+    self.age = Time.now.to_date.year - age.to_date.year
     self.save
   end
 

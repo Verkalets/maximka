@@ -1,5 +1,6 @@
 <h3>User</h3>
 <p>Name: <%= @user.name if @user.name %></p>
 <p>Friends Count: <%= @user.friends_count if @user.friends_count %></p>
-
-<%= @graph %>
+<p>Age: <%= @user.age if @user.age %></p>
+<p>Gender: <%= @user.gender if @user.gender %></p>
+<%= @graph.birthday.to_date.year  %>

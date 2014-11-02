@@ -15,9 +15,9 @@ class UsersController < ApplicationController
     @graph = FbGraph2::User.new(@user.uid).authenticate(session[:auth_token]).fetch
 
     @friends_count = @graph.friends.summary['total_count']
-
-    @user.add_data_to_profile(@friends_count)
-
+    @gender = @graph.gender
+    @age = @graph.birthday
+    @user.add_data_to_profile(@friends_count, @gender, @age)
   end
 
 end
