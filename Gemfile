@@ -16,6 +16,19 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'simple_form'
 gem 'fb_graph2'
+gem 'foundation-rails'
+
+gem 'devise'
+gem 'cancancan', '~> 1.7'
+gem 'rolify'
+gem 'simple_form'
+
+gem 'mtik'
+
+gem 'haml'
+gem 'html2haml'
+gem 'haml-rails'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]
