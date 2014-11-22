@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
     reset_session
     session[:user_id] = user.id
     session[:auth_token] = auth.credentials.token
-    redirect_to root_url, :notice => 'Signed in!'
+    redirect_to visitors_access_url, :notice => 'Signed in!'
   end
 
   def destroy

@@ -1,2 +1,10 @@
-- if current_admin.has_role?(:manager)
-	admin
+= render partial: 'header'
+
+.row
+	.large-12.columns
+		%h3 Users
+		%table.table
+			%tbody
+				- @users.each do |user|
+					%tr
+						%td= link_to user.name, user

@@ -28,6 +28,7 @@ gem 'mtik'
 gem 'haml'
 gem 'html2haml'
 gem 'haml-rails'
+gem 'chart-js-rails'
 
 group :development do
   gem 'better_errors'

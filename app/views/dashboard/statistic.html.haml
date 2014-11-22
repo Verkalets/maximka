@@ -1,0 +1,39 @@
+= render partial: 'header'
+statistic
+
+
+%h3=get_age_string
+
+
+- @users.each do |u|
+	%p= u.id
+	%p= u.name
+	%p= u.age
+	%p= u.gender
+	%hr	
+	
+%canvas#canvas{:height => "450", :width => "600"}	
+	
+:coffeescript
+	jQuery ->
+
+	  ruby_array = "#{get_age_string}"
+		
+	  js_array_age = ruby_array.split(":")
+
+	  alert js_array_age
+		
+	  data = {
+	    labels : js_array_age
+	    datasets : [
+	      {
+	        fillColor : "rgba(151,187,205,0.5)",
+	        strokeColor : "rgba(151,187,205,1)",
+	        pointColor : "rgba(151,187,205,1)",
+	        pointStrokeColor : "#fff",
+	        data : js_array_age
+	      }
+	    ]
+	  }
+
+	  myNewChart = new Chart($("#canvas").get(0).getContext("2d")).Line(data)

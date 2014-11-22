@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   get 'dashboard/setting'
   
+  get 'dashboard/statistic'
+  
   get 'visitors/access'
 
   devise_for :admins
