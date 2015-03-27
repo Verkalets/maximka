@@ -5,7 +5,7 @@ pid "/home/deploy/wifi/shared/pids/unicorn.pid"
 stderr_path "/home/deploy/wifi/shared/log/unicorn.log"
 stdout_path "/home/deploy/wifi/shared/log/unicorn.log"
 
-listen "/home/deploy/wifi/shared/system/unicorn.backmy.sock"
+listen "/home/deploy/wifi/shared/system/unicorn.wifi.sock"
 
 worker_processes 2
 

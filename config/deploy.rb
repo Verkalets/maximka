@@ -3,8 +3,7 @@
 
 set :application, 'wifi'
 set :repo_url, 'https://github.com/Verkalets/maximka'
-set :unicorn_conf, "#{deploy_to}/current/config/unicorn.rb"
-set :unicorn_pid, "#{deploy_to}/shared/pids/unicorn.pid"
+set :deploy_to, '/home/deploy/wifi'
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
@@ -17,21 +16,28 @@ set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public
 # set :keep_releases, 5
 
 namespace :deploy do
+  unicorn_conf = "#{deploy_to}/current/config/unicorn.rb"
+  unicorn_pid = "#{deploy_to}/shared/pids/unicorn.pid"
 
   desc 'Restart application'
   task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
+    on roles(:all), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
       # execute :touch, release_path.join('tmp/restart.txt')
-      run "if [ -f #{unicorn_pid} ] && [ -e /proc/$(cat #{unicorn_pid}) ]; then kill -USR2 `cat #{unicorn_pid}`; else cd #{deploy_to}/current && bundle exec unicorn_rails -E production -c #{unicorn_conf} -D; fi"
+      execute "if [ -f #{unicorn_pid} ] && [ -e /proc/$(cat #{unicorn_pid}) ]; then kill -USR2 `cat #{unicorn_pid}`; else cd #{deploy_to}/current && bundle exec unicorn_rails -E production -c #{unicorn_conf} -D; fi"
     end
   end
 
   task :start do
-    run "cd #{deploy_to}/current/ && bundle exec unicorn_rails -E production -c #{unicorn_conf} -D"
+    on roles(:all), in: :sequence, wait: 5 do
+      execute "cd #{deploy_to}/current/ && bundle exec unicorn_rails -E production -c #{unicorn_conf} -D"
+      execute "echo Hello"
+    end
   end
   task :stop do
-    run "if [ -f #{unicorn_pid} ] && [ -e /proc/$(cat #{unicorn_pid}) ]; then kill -QUIT `cat #{unicorn_pid}`; fi"
+    on roles(:all), in: :sequence, wait: 5 do
+      execute "if [ -f #{unicorn_pid} ] && [ -e /proc/$(cat #{unicorn_pid}) ]; then kill -QUIT `cat #{unicorn_pid}`; fi"
+    end
   end
 
   after :restart, :clear_cache do
