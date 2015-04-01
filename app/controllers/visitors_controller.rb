@@ -1,7 +1,7 @@
 require 'mtik'
 
 class VisitorsController < ApplicationController
-  
+
   def access
       # Be verbose in output
       if session[:auth_token]
@@ -20,7 +20,7 @@ class VisitorsController < ApplicationController
           :limit => 10
         )
       else
-        render text: 'lol'
+        render text: 'You need authorize'
       end
   end
 end

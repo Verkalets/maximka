@@ -9,12 +9,12 @@ Rails.application.routes.draw do
 
   get 'visitors/access'
 
-
+  get 'visitors/index'
   devise_for :admins
   resources :users
 
   root to: 'visitors#index'
-  
+
 
   get '/auth/facebook/callback' => 'sessions#create'
   get '/auth/vkontakte/callback' => 'sessions#vkontakte'
