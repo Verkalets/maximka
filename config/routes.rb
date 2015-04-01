@@ -4,18 +4,18 @@ Rails.application.routes.draw do
   get 'dashboard/show'
 
   get 'dashboard/setting'
-  
+
   get 'dashboard/statistic'
-  
+
   get 'visitors/access'
-  
+
 
   devise_for :admins
   resources :users
-  
+
   root to: 'visitors#index'
   
-  
+
   get '/auth/facebook/callback' => 'sessions#create'
   get '/auth/vkontakte/callback' => 'sessions#vkontakte'
   get '/signin' => 'sessions#new', :as => :signin

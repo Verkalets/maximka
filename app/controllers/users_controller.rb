@@ -14,14 +14,14 @@ class UsersController < ApplicationController
 
     # Add Data into DB
     
-    if @user.provider === 'facebook'
+    if @user.provider === 'facebook' && @user.provider != 'vkontakte' 
       @graph = FbGraph2::User.new(@user.uid).authenticate(session[:auth_token]).fetch
     
       @friends_count = @graph.friends.summary['total_count']
       @gender = @graph.gender
       @age = @graph.birthday
       # @user.add_data_to_profile(@friends_count, @gender, @age) #Get Data
-    elsif @user.provider = 'vkontakte'
+    elsif @user.provider === 'vkontakte' && @user.provider != 'facebook' 
     end
     
     ## Post into feed
