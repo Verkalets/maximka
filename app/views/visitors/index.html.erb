@@ -1,6 +1,0 @@
-<h3>Welcome</h3>
-<p><%= link_to 'Users:', users_path %> <%= User.count %> registered</p>
-
-<% if session[:auth_token].present? %>
-	<h1><%= session[:auth_token] %></h1>
-<% end %>
