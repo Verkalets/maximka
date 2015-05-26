@@ -1,29 +1,30 @@
 class User < ActiveRecord::Base
 
-  def self.create_with_omniauth(auth)
+  def self.create_with_fb_omniauth(auth)
     create! do |user|
       user.provider = auth['provider']
-      
       user.uid = auth['uid']
       if auth['info']
-         user.name = auth['info']['name'] || ""
+        user.name = auth.info.name || ""
+        user.gender = auth.extra.raw_info.gender || ""
+        user.age = auth.extra.raw_info.birthday || ""
       end
     end
   end
-
-  def add_data_to_profile(friends_count, gender, age)
-    @age = age
-    @gender = gender
-    @friends_count = friends_count
-    
-    if @age == 1
-      self.friends_count = @friends_count
-      self.gender = @gender
-      self.age = Time.now.to_date.year - @age.to_date.year
-      self.save
-    else
-      self.age = 0
+  
+  def self.create_with_vk_omniauth(auth)
+    create! do |user|
+      user.provider = auth['provider']
+      user.uid = auth['uid']
+      if auth['info']
+        user.name = auth.info.name || ""
+        user.gender = auth.extra.raw_info.sex || ""
+        user.age = auth.extra.raw_info.bdate || ""
+      end
     end
-  end
+  end  
+
+    
+
 
 end

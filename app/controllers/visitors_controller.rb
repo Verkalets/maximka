@@ -4,6 +4,7 @@ class VisitorsController < ApplicationController
 
   def access
       # Be verbose in output
+=begin      
       if session[:auth_token]
       MTik::verbose = true
 
@@ -22,5 +23,6 @@ class VisitorsController < ApplicationController
       else
         render text: 'You need authorize'
       end
+=end      
   end
 end
