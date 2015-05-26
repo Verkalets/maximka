@@ -2,7 +2,7 @@
 #lock '3.0.1'
 
 set :application, 'wifi'
-set :repo_url, 'https://github.com/Verkalets/maximka'
+set :repo_url, 'https://github.com/coaxsoft/maximka'
 set :deploy_to, '/home/deploy/wifi'
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
