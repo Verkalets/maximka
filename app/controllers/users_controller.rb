@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     elsif @user.gender == "0"
     @user.gender = "User did not select gender"    
     end  
-
+=begin
     if @user.age != nil && @user.provider == 'facebook'
     current_year = DateTime.now.to_date.strftime("%Y").to_i
     current_month = DateTime.now.to_date.strftime("%m").to_i
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
 
     @user_age = (current_total_days - usrs_total_days)/365 
     end
-
+=end
   
     ## Post into feed
     
