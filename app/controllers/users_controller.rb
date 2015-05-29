@@ -1,14 +1,13 @@
 class UsersController < ApplicationController
   
   before_action :authenticate_admin!
+  before_action :set_user, only: [:show, :destroy]
   
   def index
     @users = User.all
   end
 
   def show
-    @user = User.find(params[:id])
-    
     # For VK gender
     if @user.gender == "2"
     @user.gender = "male"
@@ -58,6 +57,17 @@ class UsersController < ApplicationController
     #  :description => 'A Ruby wrapper for Facebook Graph API'
     #)
     
+  end
+
+  def destroy
+    @user.destroy
+    respond_to do |format|
+      format.html { redirect_to users_url }
+    end
+  end
+
+  def set_user
+    @user = User.find(params[:id])
   end
 
 end
