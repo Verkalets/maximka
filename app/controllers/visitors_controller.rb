@@ -1,28 +1,64 @@
+require 'rubygems'
 require 'mtik'
 
 class VisitorsController < ApplicationController
 
   def access
-      # Be verbose in output
-=begin      
+=begin    
+      # Be verbose in output      
       if session[:auth_token]
-      MTik::verbose = true
+      #MTik::verbose = true
+ 
+      add_user = ["/system/script/run=.id=*2"]
+      
+      #/system/script/run=.id=*1
+      #/system/script/print
 
-      # Connect to the device:
-      p connection = MTik::command(
-        :host    => '192.168.0.200',
-          :user    => 'api',
-          :pass    => 'rf9kq)pL!',
-          :command => [
-            "/interface/monitor-traffic",
-            "=interface=ether0",
-            "=.proplist=rx-bits-per-second,tx-bits-per-second"
-          ],
-          :limit => 10
-        )
+      p MTik::command(
+      :host=>'192.168.0.200',
+      :user=>'admin',
+      :pass=>'ok3mk%lq)',
+      :command=>add_user
+      )
+
+     
       else
         render text: 'You need authorize'
       end
-=end      
+
+
+      begin
+      connection = MTik::Connection.new(
+        :host=>'192.168.0.200',
+        :user=>'admin',
+        :pass=>'ok3mk%lq)'
+      )
+      end
+
+      arp_info  = connection.get_reply('/ip/arp/getall')
+      arp_last_info_address = arp_info[-2]['address']
+      arp_last_info_mac = arp_info[-2]['mac-address']
+      
+
+      connection.close
+      ip = arp_last_info_address
+      mac = arp_last_info_mac 
+    
+
+      command = ["/ip/hotspot/user/add",
+      "=name=TEST_USER",
+      "=address=ip",
+      "=mac-address=mac"
+      ]
+
+      p MTik::command(
+      :host=>'192.168.0.200',
+      :user=>'admin',
+      :pass=>'ok3mk%lq)',
+      :command=>command
+      )
+=end
+
   end
+
 end
